@@ -1,0 +1,27 @@
+dir		= ./demoCA
+serial		= $dir/tsaserial
+crypto_device	= builtin
+signer_cert	= $dir/tsacert.pem
+certs		= $dir/cacert.pem
+signer_key	= $dir/private/tsakey.pem
+default_policy	= tsa_policy1
+other_policies	= tsa_policy2, tsa_policy3
+digests		= md5, sha1
+accuracy	= secs:1, millisecs:500, microsecs:100
+clock_precision_digits  = 0
+ordering		= yes
+tsa_name		= yes
+ess_cert_id_chain	= no
+openssl_conf = openssl_def
+
+[openssl_def]
+engines = engine_section
+
+[engine_section]
+pkcs11 = pkcs11_section
+
+[pkcs11_section]
+engine_id = pkcs11
+dynamic_path = /usr/lib/engines/engine_pkcs11.so
+MODULE_PATH = opensc-pkcs11.so
+init = 0
